@@ -6,7 +6,6 @@ import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import "dotenv/config";
 
-
 // Setup basic Express configurations
 const app = express();
 
@@ -33,13 +32,13 @@ app.get("/:code", async (req, res) => {
   const { code } = req.params;
   try {
     const link = await Link.findOne({
-      shortLink: `${process.BASE_URL}${code}`,
+      shortLink: `${process.env.BASE_URL}${code}`,
     });
 
     if (link) {
       // Increase click count
       await Link.findOneAndUpdate(
-        { shortLink: `${process.BASE_URL}${code}` },
+        { shortLink: `${process.env.BASE_URL}${code}` },
         { clicks: link.clicks + 1 }
       );
 
@@ -64,7 +63,7 @@ app.post("/shorten", async (req, res) => {
 
   const newLink = new Link({
     longLink: link,
-    shortLink: `${process.BASE_URL}${code}`,
+    shortLink: `${process.env.BASE_URL}${code}`,
   });
 
   await newLink.save();
@@ -82,6 +81,6 @@ app.delete("/link/:id", async (req, res) => {
 });
 
 // Start the server
-app.listen(process.PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
