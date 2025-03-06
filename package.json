@@ -1,7 +1,7 @@
 {
 	"type": "module",
 	"scripts": {
-		"build": "node index.js"
+		"prod": "node index.js"
 	},
 	"dependencies": {
 		"body-parser": "^1.20.3",
