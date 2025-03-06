@@ -4,11 +4,11 @@ import Link from "./models/link.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
+import "dotenv/config";
+
 
 // Setup basic Express configurations
 const app = express();
-const PORT = 3000;
-const WEBSITE_URL = "http://localhost:3000/";
 
 // Setup ES Module __dirname
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -33,13 +33,13 @@ app.get("/:code", async (req, res) => {
   const { code } = req.params;
   try {
     const link = await Link.findOne({
-      shortLink: `${WEBSITE_URL}${code}`,
+      shortLink: `${process.BASE_URL}${code}`,
     });
 
     if (link) {
       // Increase click count
       await Link.findOneAndUpdate(
-        { shortLink: `${WEBSITE_URL}${code}` },
+        { shortLink: `${process.BASE_URL}${code}` },
         { clicks: link.clicks + 1 }
       );
 
@@ -64,7 +64,7 @@ app.post("/shorten", async (req, res) => {
 
   const newLink = new Link({
     longLink: link,
-    shortLink: `${WEBSITE_URL}${code}`,
+    shortLink: `${process.BASE_URL}${code}`,
   });
 
   await newLink.save();
@@ -82,6 +82,6 @@ app.delete("/link/:id", async (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
+app.listen(process.PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
