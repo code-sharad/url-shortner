@@ -63,7 +63,7 @@ app.post("/shorten", async (req, res) => {
 
   const newLink = new Link({
     longLink: link,
-    shortLink: `${process.env.BASE_URL}${code}`,
+    shortLink: `${process.env.BASE_URL}/${code}`,
   });
 
   await newLink.save();
