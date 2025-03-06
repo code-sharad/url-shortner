@@ -32,7 +32,7 @@ app.get("/:code", async (req, res) => {
   const { code } = req.params;
   try {
     const link = await Link.findOne({
-      shortLink: `${process.env.BASE_URL}${code}`,
+      shortLink: `${process.env.BASE_URL}/${code}`,
     });
 
     if (link) {
