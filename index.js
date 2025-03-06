@@ -38,7 +38,7 @@ app.get("/:code", async (req, res) => {
     if (link) {
       // Increase click count
       await Link.findOneAndUpdate(
-        { shortLink: `${process.env.BASE_URL}${code}` },
+        { shortLink: `${process.env.BASE_URL}/${code}` },
         { clicks: link.clicks + 1 }
       );
 
