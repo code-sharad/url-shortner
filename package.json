@@ -1,5 +1,8 @@
 {
 	"type": "module",
+	"scripts": {
+		"build":"node index.js"
+	},
 	"dependencies": {
 		"body-parser": "^1.20.3",
 		"ejs": "^3.1.10",
