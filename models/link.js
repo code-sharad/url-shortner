@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const linkSchema = new mongoose.Schema({
   longLink: {
@@ -15,4 +15,5 @@ const linkSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Link", linkSchema);
+const Link = mongoose.model("Link", linkSchema);
+module.exports = Link;

@@ -1,16 +1,13 @@
-import express from "express";
-import connectDB from "./db.js";
-import Link from "./models/link.js";
-import path from "path";
-import { fileURLToPath } from "url";
-import bodyParser from "body-parser";
-import "dotenv/config";
+const express = require("express")
+const connectDB = require("./db.js")
+const Link = require("./models/link.js")
+const path = require("path")
+const bodyParser = require("body-parser")
+require("dotenv").config();
 
-// Setup basic Express configurations
 const app = express();
 
-// Setup ES Module __dirname
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 
 // Setup Express middleware
 app.set("view engine", "ejs");

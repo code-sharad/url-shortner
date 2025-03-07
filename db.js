@@ -1,5 +1,5 @@
-import "dotenv/config";
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 // const URL = "mongodb://localhost:27017 /gdsc-project";
 async function connectDB() {
@@ -12,4 +12,4 @@ async function connectDB() {
   }
 }
 
-export default connectDB;
+module.exports = connectDB;
