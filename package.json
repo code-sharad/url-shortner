@@ -1,4 +1,5 @@
 {
+	"author": "sharad",
 	"scripts": {
 		"start": "node index.js"
 	},
