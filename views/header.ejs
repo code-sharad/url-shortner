@@ -1,21 +1,74 @@
 <style>
-    .header {
-        background: white;
-        padding: 1rem 2rem;
+  :root {
+    --header-bg: #fff;
+    --logo-color: #3b82f6;
+    --header-shadow: 0 2px 8px #0002;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --header-bg: #121826;
+      --logo-color: #60a5fa;
+      --header-shadow: 0 2px 12px #000a;
     }
-  
-    .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #3b82f6;
-        text-decoration: none;
+  }
+  .header {
+    background: var(--header-bg);
+    padding: 1rem 2rem;
+    box-shadow: var(--header-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0 0 16px 16px;
+    transition: background 0.3s;
+  }
+  .logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--logo-color);
+    text-decoration: none;
+    font-family: 'Inter', Arial, sans-serif;
+    letter-spacing: -1px;
+    transition: color 0.3s;
+  }
+  .toggle-dark {
+    padding: 6px 14px;
+    border-radius: 99px;
+    background: #eee;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    transition: background 0.3s;
+  }
+  @media (prefers-color-scheme: dark) {
+    .toggle-dark {
+      background: #222b3a;
+      color: #fafafa;
     }
-   
+  }
 </style>
-
 <header class="header">
-    <nav class="nav">
-        <a href="/" class="logo">URL Shortener</a>
-        
-    </nav>
+  <nav class="nav">
+    <a href="/" class="logo">URL Shortener</a>
+  </nav>
+  <button class="toggle-dark" id="toggleDark">🌙</button>
+  <script>
+    // Toggle dark/light mode manually
+    document.getElementById('toggleDark').onclick = function() {
+      if(document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.removeItem('theme');
+        this.textContent = '🌙';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        this.textContent = '☀️';
+      }
+    };
+    // On load: persist user theme
+    if(localStorage.getItem('theme')) {
+      document.documentElement.classList.add('dark');
+      document.getElementById('toggleDark').textContent = '☀️';
+    }
+  </script>
 </header>
